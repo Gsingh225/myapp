@@ -36,7 +36,7 @@ class Test extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Post(title: "AITA for xyzing?", postPreview: "I own 2 donkeys and blah blah blah...", postContent: "My husband insists on washing his dishes in the bathtub. He claims it's more efficient and saves water. Meanwhile, I'm convinced he's secretly a hobbit who's trying to recreate the Shire in our bathroom. Every evening, I brace myself for the sound of pots and pans clanging against porcelain, followed by his cheerful whistling. I've considered staging an intervention, but honestly, his dedication to this bizarre ritual is kind of endearing. Plus, the bathtub is sparkling clean.",),
+                    Post(title: "AITA for xyzing?", postPreview: "I own 2 donkeys and blah blah blah blah blah blah blah blah blah...", postContent: "My husband insists on washing his dishes in the bathtub. He claims it's more efficient and saves water. Meanwhile, I'm convinced he's secretly a hobbit who's trying to recreate the Shire in our bathroom. Every evening, I brace myself for the sound of pots and pans clanging against porcelain, followed by his cheerful whistling. I've considered staging an intervention, but honestly, his dedication to this bizarre ritual is kind of endearing. Plus, the bathtub is sparkling clean.",),
                     Post(title: "WHy is reddit just going to all these aita posts. It's. getting out of hand.", postPreview: "As a 39 year old living in my moms basement...", postContent: "AITA for charging my neighbor for the electricity their kid used while playing video games at my house? I'm a single mom working two jobs, and my electric bill is already high. This kid is over here every day, running up my bill. I tried talking to the parents, but they just laughed it off. So, I started charging them a gaming fee. They're outraged, but I don't feel bad. Am I the jerk?",)
                   ],
                 )
@@ -58,7 +58,7 @@ class PostDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title),), //temp tes
+      appBar: AppBar(title: CustomText(color: Colors.white, text: title,)), //temp tes
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,
@@ -89,7 +89,7 @@ class Post extends StatelessWidget {
       child: Container(
         color: Color.fromARGB(255, 43, 2, 2),
         padding: EdgeInsets.symmetric(vertical: 2, horizontal: 4),
-        margin: EdgeInsets.symmetric(vertical: 10),
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
         child: Column(
           children: [
             CustomText(text: title, color: Colors.white),
