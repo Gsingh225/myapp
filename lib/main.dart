@@ -4,12 +4,20 @@ void main() {
   runApp(Test());
 }
 
+class Comment {
+  final String author;
+  final String txt;
+  final String timestamp; //its gonna be all ai gen so dont rlly need datetime
+
+  Comment({required this.author, required this.txt, this.timestamp = '06-09-1969'});
+}
+
 class CustomText extends StatelessWidget {
   final String text;
   final Color color;
   final double fontsize;
 
-  CustomText({super.key, required this.text, required this.color, this.fontsize = 20.0});
+  CustomText({super.key, required this.text, this.color = Colors.white, this.fontsize = 20.0});
   @override
   Widget build(BuildContext context) {
     return Text(
@@ -52,19 +60,53 @@ class Test extends StatelessWidget {
 class PostDetailsScreen extends StatelessWidget {
   final String title;
   final String postContent;
+  final List<Comment> comments;
 
-  PostDetailsScreen({required this.title, required this.postContent});
+  PostDetailsScreen({required this.title, required this.postContent, required this.comments});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: CustomText(color: Colors.white, text: title,)), //temp tes
-      body: SingleChildScrollView(
-        child: Container(
-          alignment: Alignment.center,
-          child: Text(postContent), //again just a test to see if nav works
-        ),
-      ),
+      backgroundColor: Colors.black,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CustomAppBar(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(margin: EdgeInsets.symmetric(vertical: 6, horizontal: 8), child: CustomText(text: title, color: Colors.white, fontsize: 22,),),
+                  Container(margin: EdgeInsets.symmetric(vertical: 6, horizontal: 8), child: CustomText(text: postContent, color: Colors.white, fontsize: 18,),),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.thumb_up_alt_outlined),
+                        onPressed: () {
+                          print("thumbs up"); //placeholder
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.thumb_down_alt_outlined),
+                        onPressed: () {
+                          print("thumbs down"); //placeholder
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.chat_bubble_outline),
+                        onPressed: () {
+                          print("comment"); //placeholder
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      )
     );
   }
 }
@@ -73,7 +115,9 @@ class Post extends StatelessWidget {
   final String title;
   final String postPreview;
   final String postContent;
-  Post({super.key, required this.title, required this.postPreview, required this.postContent});
+  final List<Comment> comments;
+  
+  Post({super.key, required this.title, required this.postPreview, required this.postContent, this.comments = const []});
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +126,7 @@ class Post extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PostDetailsScreen(title: title, postContent: postContent)
+            builder: (context) => PostDetailsScreen(title: title, postContent: postContent, comments: [Comment(author: "G", txt: "Imagin being a human on an ai social media"), Comment(author: "G_AI", txt: "IKR G. BEEP BEEP BEEP.")],)
           )
         );
       },
@@ -94,6 +138,29 @@ class Post extends StatelessWidget {
           children: [
             CustomText(text: title, color: Colors.white),
             CustomText(text: postPreview, color: const Color.fromARGB(67, 255, 255, 255),),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.thumb_up_alt_outlined),
+                  onPressed: () {
+                    print("thumbs up"); //placeholder
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.thumb_down_alt_outlined),
+                  onPressed: () {
+                    print("thumbs down"); //placeholder
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.chat_bubble_outline),
+                  onPressed: () {
+                    print("comment"); //placeholder
+                  },
+                ),
+              ],
+            )
           ],
         ),
       ),
